@@ -1,26 +1,15 @@
-# DeFracing - Projeto de teste do Checkout Pro
+# DeFracing - Catálogo base
 
-## Como usar no Vercel
-
-1. Suba estes arquivos no GitHub.
-2. No Vercel, abra o projeto.
-3. Vá em **Settings > Environment Variables**.
-4. Crie estas variáveis:
-
-- `MP_ACCESS_TOKEN` = seu Access Token de produção do Mercado Pago
-- `SITE_URL` = URL atual do site na Vercel  
-  Exemplo: `https://defracing-loja.vercel.app`
-
-5. Faça um novo deploy.
+Este pacote substitui a página simples de teste por uma versão com:
+- catálogo montado com base nos links enviados
+- seleção de produto
+- checkout com Mercado Pago ainda usando valor de teste
+- páginas de sucesso, pendente e falha
 
 ## Importante
-- Não coloque o Access Token dentro do GitHub.
-- O repositório está público: deixe o token só nas variáveis do Vercel.
-- O item atual é um pedido de teste de R$ 10,00.
-- Para trocar nome e valor, edite `api/create-preference.js`.
+Os preços ainda estão como "Preço a revisar".
+Enquanto isso, a API usa R$ 10,00 como valor de teste para qualquer produto selecionado.
 
-## Páginas
-- `/` = formulário e botão do checkout
-- `/success` = pagamento aprovado
-- `/pending` = pagamento pendente
-- `/failure` = pagamento não concluído
+## Variáveis no Vercel
+- MP_ACCESS_TOKEN
+- SITE_URL

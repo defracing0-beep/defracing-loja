@@ -4,6 +4,5 @@ module.exports = async (req, res) => {
     query: req.query,
     body: req.body
   });
-
   res.status(200).json({ ok: true });
 };

@@ -9,14 +9,13 @@ module.exports = async (req, res) => {
     const siteUrl = process.env.SITE_URL || "https://defracing-loja.vercel.app";
 
     if (!accessToken) {
-      res.status(500).json({
-        error: "Falta configurar a variável MP_ACCESS_TOKEN no Vercel."
-      });
+      res.status(500).json({ error: "Falta configurar a variável MP_ACCESS_TOKEN no Vercel." });
       return;
     }
 
     const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
     const customer = body.customer || {};
+    const product = body.product || {};
 
     const requiredFields = ["name", "cpf", "email", "zipCode", "street", "number", "city", "state", "whatsapp"];
     const missing = requiredFields.filter((field) => !customer[field]);
@@ -26,15 +25,11 @@ module.exports = async (req, res) => {
       return;
     }
 
+    const title = product.name || "Pedido DeFracing";
+    const unitPrice = 10;
+
     const preference = {
-      items: [
-        {
-          title: "Pedido de teste DeFracing",
-          quantity: 1,
-          currency_id: "BRL",
-          unit_price: 10
-        }
-      ],
+      items: [{ title, quantity: 1, currency_id: "BRL", unit_price: unitPrice }],
       back_urls: {
         success: `${siteUrl}/success`,
         pending: `${siteUrl}/pending`,
@@ -46,34 +41,28 @@ module.exports = async (req, res) => {
       payer: {
         name: customer.name,
         email: customer.email,
-        identification: {
-          type: "CPF",
-          number: String(customer.cpf)
-        },
+        identification: { type: "CPF", number: String(customer.cpf) },
         address: {
           zip_code: String(customer.zipCode),
           street_name: String(customer.street),
           street_number: String(customer.number)
         }
       },
-      shipments: {
-        cost: 0,
-        mode: "not_specified"
-      },
+      shipments: { cost: 0, mode: "not_specified" },
       metadata: {
         whatsapp: customer.whatsapp,
         district: customer.district || "",
         city: customer.city,
-        state: customer.state
+        state: customer.state,
+        brand: product.brand || "",
+        model: product.model || "",
+        product_type: product.type || ""
       }
     };
 
     const mpResponse = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
-      headers: {
-        "Authorization": `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
-      },
+      headers: { "Authorization": `Bearer ${accessToken}`, "Content-Type": "application/json" },
       body: JSON.stringify(preference)
     });
 

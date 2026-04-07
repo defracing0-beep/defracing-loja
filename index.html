@@ -1,257 +1,255 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DeFracing - Teste Checkout Pro</title>
-  <style>
-    :root{
-      --red:#e31e24;
-      --dark:#2f3138;
-      --bg:#f5f5f7;
-      --muted:#6b7280;
-      --border:#e5e7eb;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      background:var(--bg);
-      color:#111827;
-    }
-    header{
-      background:#fff;
-      border-bottom:1px solid var(--border);
-      padding:18px 24px;
-      position:sticky;
-      top:0;
-    }
-    .brand{
-      font-size:28px;
-      font-weight:800;
-      letter-spacing:-0.03em;
-    }
-    .brand .red{color:var(--red)}
-    .brand .dark{color:var(--dark)}
-    main{
-      max-width:1100px;
-      margin:0 auto;
-      padding:32px 20px 60px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:24px;
-    }
-    .card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:24px;
-      box-shadow:0 12px 30px rgba(0,0,0,.04);
-    }
-    .hero{
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      min-height:280px;
-    }
-    .badge{
-      display:inline-block;
-      border-radius:999px;
-      padding:8px 12px;
-      background:#fee2e2;
-      color:#991b1b;
-      font-size:13px;
-      font-weight:700;
-    }
-    h1{
-      margin:14px 0 12px;
-      font-size:40px;
-      line-height:1.05;
-    }
-    p{color:var(--muted); line-height:1.5}
-    .product{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-top:18px;
-      padding:16px;
-      border-radius:16px;
-      background:#fafafa;
-      border:1px solid var(--border);
-    }
-    .price{
-      font-size:34px;
-      font-weight:800;
-      color:var(--dark);
-    }
-    .free{
-      color:#065f46;
-      font-weight:700;
-      font-size:14px;
-    }
-    form{
-      display:grid;
-      gap:12px;
-      margin-top:8px;
-    }
-    .row{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-    input{
-      width:100%;
-      padding:13px 14px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      font-size:15px;
-      outline:none;
-    }
-    input:focus{
-      border-color:#9ca3af;
-      box-shadow:0 0 0 3px rgba(17,24,39,.06);
-    }
-    button{
-      margin-top:10px;
-      padding:15px 18px;
-      border:0;
-      border-radius:14px;
-      background:var(--red);
-      color:white;
-      font-size:16px;
-      font-weight:700;
-      cursor:pointer;
-    }
-    button:disabled{
-      opacity:.7;
-      cursor:not-allowed;
-    }
-    .note{
-      margin-top:12px;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .error{
-      margin-top:10px;
-      color:#b91c1c;
-      font-size:14px;
-      display:none;
-    }
-    @media (max-width: 860px){
-      .grid{grid-template-columns:1fr}
-      h1{font-size:32px}
-      .row{grid-template-columns:1fr}
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DeFracing</title>
+<style>
+:root { --red:#e31e24; --dark:#2f3138; --muted:#6b7280; --border:#e5e7eb; --bg:#f6f7f8; }
+* { box-sizing:border-box; }
+body { margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:#111827; }
+header { position:sticky; top:0; background:rgba(255,255,255,.95); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); z-index:10; }
+.wrap { max-width:1200px; margin:0 auto; padding:0 20px; }
+.header-row { display:flex; align-items:center; justify-content:space-between; padding:18px 0; gap:12px; }
+.logo { font-size:30px; font-weight:800; letter-spacing:-0.03em; }
+.logo .red { color:var(--red); } .logo .dark { color:var(--dark); }
+nav a { text-decoration:none; color:#374151; margin-left:18px; font-size:14px; }
+.hero { display:grid; grid-template-columns:1.1fr .9fr; gap:24px; padding:32px 0; }
+.card { background:#fff; border:1px solid var(--border); border-radius:24px; box-shadow:0 12px 30px rgba(0,0,0,.04); }
+.hero-copy { padding:28px; }
+.badge { display:inline-block; background:#fee2e2; color:#991b1b; border-radius:999px; padding:8px 12px; font-size:13px; font-weight:700; }
+h1 { margin:16px 0 10px; font-size:44px; line-height:1.02; }
+p { color:var(--muted); line-height:1.55; }
+.hero-grid { margin-top:22px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.pill { padding:12px 14px; background:#fafafa; border:1px solid var(--border); border-radius:16px; font-size:14px; }
+.checkout-box { padding:24px; }
+.checkout-box h2 { margin:0 0 8px; }
+.summary { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border:1px solid var(--border); background:#fafafa; border-radius:16px; margin:14px 0 18px; }
+.summary strong { display:block; }
+.summary .price { font-size:22px; font-weight:800; }
+.summary .free { color:#065f46; font-size:13px; font-weight:700; }
+form { display:grid; gap:12px; }
+.row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+input { width:100%; padding:13px 14px; border:1px solid var(--border); border-radius:12px; font-size:15px; outline:none; background:#fff; }
+button { border:0; border-radius:14px; cursor:pointer; }
+.primary { background:var(--red); color:#fff; font-weight:700; padding:14px 16px; }
+.secondary { background:#111827; color:#fff; padding:10px 14px; font-weight:700; }
+.section { padding:8px 0 28px; }
+.section-head { display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:18px; }
+.section-head h2 { margin:4px 0 0; font-size:32px; }
+.muted-card { padding:12px 14px; border:1px solid var(--border); background:#fafafa; border-radius:16px; font-size:14px; color:#4b5563; }
+.brand-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; }
+.brand-card, .catalog-card, .product-card { background:#fff; border:1px solid var(--border); border-radius:20px; padding:18px; }
+.brand-card h3, .catalog-card h3 { margin:0 0 12px; }
+.model-list { display:grid; gap:8px; max-height:280px; overflow:auto; }
+.model-item, .catalog-item { background:#fafafa; border-radius:12px; padding:10px 12px; font-size:14px; border:1px solid var(--border); }
+.product-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.product-card h3 { margin:8px 0 6px; font-size:18px; }
+.product-card p { margin:0; font-size:14px; }
+.type-badge { display:inline-block; background:#f3f4f6; border-radius:999px; padding:6px 10px; font-size:12px; margin-bottom:8px; }
+.product-bottom { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:14px; }
+.note { font-size:13px; color:var(--muted); margin-top:8px; }
+.error { display:none; color:#b91c1c; font-size:14px; margin-top:6px; }
+footer { padding:28px 0 40px; color:#6b7280; font-size:14px; }
+@media (max-width: 1100px) { .brand-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width: 860px) { .hero { grid-template-columns:1fr; } .brand-grid, .product-grid { grid-template-columns:1fr; } .row { grid-template-columns:1fr; } h1 { font-size:34px; } nav { display:none; } }
+</style>
 </head>
 <body>
-  <header>
-    <div class="brand"><span class="red">D&F</span><span class="dark">racing</span></div>
-  </header>
+<header>
+  <div class="wrap header-row">
+    <div class="logo"><span class="red">D&F</span><span class="dark">racing</span></div>
+    <nav>
+      <a href="#marcas">Marcas</a>
+      <a href="#linhas">Linhas</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#checkout">Checkout</a>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <div class="grid">
-      <section class="card hero">
-        <div>
-          <span class="badge">Checkout Pro Mercado Pago</span>
-          <h1>Teste real de pagamento da DeFracing</h1>
-          <p>
-            Esta página foi feita para validar o fluxo real do Checkout Pro.
-            O formulário coleta CPF e endereço para emissão da NFe e redireciona o cliente para o Mercado Pago.
-          </p>
-        </div>
-
-        <div class="product">
-          <div>
-            <strong>Pedido de teste DeFracing</strong>
-            <div class="free">Frete grátis</div>
-          </div>
-          <div class="price">R$ 10,00</div>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2 style="margin-top:0">Dados do cliente</h2>
-        <p style="margin-top:0">Preencha para seguir ao pagamento.</p>
-
-        <form id="checkout-form">
-          <input name="name" placeholder="Nome completo" required />
-          <div class="row">
-            <input name="cpf" placeholder="CPF (obrigatório para NFe)" required />
-            <input name="whatsapp" placeholder="WhatsApp" required />
-          </div>
-          <input name="email" type="email" placeholder="E-mail" required />
-          <div class="row">
-            <input name="zipCode" placeholder="CEP" required />
-            <input name="street" placeholder="Endereço" required />
-          </div>
-          <div class="row">
-            <input name="number" placeholder="Número" required />
-            <input name="district" placeholder="Bairro" required />
-          </div>
-          <div class="row">
-            <input name="city" placeholder="Cidade" required />
-            <input name="state" placeholder="Estado" required />
-          </div>
-          <button id="pay-btn" type="submit">Finalizar com Mercado Pago</button>
-          <div class="error" id="error-box"></div>
-          <div class="note">
-            Este projeto usa um item de teste de R$ 10,00. Depois você pode trocar o produto e o valor no arquivo <code>api/create-preference.js</code>.
-          </div>
-        </form>
-      </section>
+<main class="wrap">
+  <section class="hero">
+    <div class="card hero-copy">
+      <span class="badge">Catálogo DeFracing montado com base nos links enviados</span>
+      <h1>Peças de moto por marca, modelo e tipo de aplicação</h1>
+      <p>
+        Esta versão já traz o catálogo organizado com os produtos levantados a partir dos seus anúncios.
+        O checkout segue funcionando em modo de teste de valor para você revisar visual e fluxo antes de acertar os preços finais.
+      </p>
+      <div class="hero-grid">
+        <div class="pill">Frete grátis em todos os produtos</div>
+        <div class="pill">CPF obrigatório para NFe</div>
+        <div class="pill">Checkout Pro Mercado Pago</div>
+        <div class="pill">Preços marcados para revisão final</div>
+      </div>
     </div>
-  </main>
 
-  <script>
-    const form = document.getElementById("checkout-form");
-    const btn = document.getElementById("pay-btn");
-    const errorBox = document.getElementById("error-box");
+    <div class="card checkout-box" id="checkout">
+      <h2>Selecionar produto e testar checkout</h2>
+      <p>Escolha um item do catálogo abaixo. Enquanto os preços não forem definidos, o checkout usa valor de teste.</p>
 
-    function onlyDigits(v){ return (v || "").replace(/\D/g, ""); }
+      <div class="summary">
+        <div>
+          <strong id="selected-name">Pedido de teste DeFracing</strong>
+          <div class="free" id="selected-meta">Frete grátis</div>
+        </div>
+        <div class="price" id="selected-price">R$ 10,00</div>
+      </div>
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      errorBox.style.display = "none";
-      errorBox.textContent = "";
-      btn.disabled = true;
-      btn.textContent = "Gerando pagamento...";
+      <form id="checkout-form">
+        <input name="name" placeholder="Nome completo" required />
+        <div class="row">
+          <input name="cpf" placeholder="CPF (obrigatório para NFe)" required />
+          <input name="whatsapp" placeholder="WhatsApp" required />
+        </div>
+        <input name="email" type="email" placeholder="E-mail" required />
+        <div class="row">
+          <input name="zipCode" placeholder="CEP" required />
+          <input name="street" placeholder="Endereço" required />
+        </div>
+        <div class="row">
+          <input name="number" placeholder="Número" required />
+          <input name="district" placeholder="Bairro" required />
+        </div>
+        <div class="row">
+          <input name="city" placeholder="Cidade" required />
+          <input name="state" placeholder="Estado" required />
+        </div>
+        <button class="primary" id="pay-btn" type="submit">Finalizar com Mercado Pago</button>
+        <div class="error" id="error-box"></div>
+        <div class="note">Enquanto os preços não forem revisados, o site gera checkout com valor de teste. Depois trocamos item por item.</div>
+      </form>
+    </div>
+  </section>
 
-      const formData = new FormData(form);
-      const customer = Object.fromEntries(formData.entries());
-      customer.cpf = onlyDigits(customer.cpf);
-      customer.zipCode = onlyDigits(customer.zipCode);
-      customer.whatsapp = onlyDigits(customer.whatsapp);
+  <section class="section" id="marcas">
+    <div class="section-head">
+      <div><div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:.18em;">Marcas</div><h2>Navegação por fabricante</h2></div>
+      <div class="muted-card">Honda, Yamaha, Kawasaki, BMW e Suzuki</div>
+    </div>
+    <div class="brand-grid" id="brand-grid"></div>
+  </section>
 
-      try {
-        const response = await fetch("/api/create-preference", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ customer })
-        });
+  <section class="section" id="linhas">
+    <div class="section-head">
+      <div><div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:.18em;">Linhas</div><h2>Resumo por marca</h2></div>
+      <div class="muted-card">Os produtos já estão distribuídos por modelo e tipo</div>
+    </div>
+    <div class="brand-grid">
+      <div class="catalog-card"><h3>Honda</h3><div class="model-list">
+        <div class="catalog-item">CB1000R — Paralama traseiro</div><div class="catalog-item">NC700 / NC750 — Paralama traseiro</div><div class="catalog-item">CB300 / CB300R — Paralama, spoiler e protetor</div><div class="catalog-item">CB300F Twister — Extensor e kit</div><div class="catalog-item">CB500X — Extensor 2020–2022 e 2023+</div><div class="catalog-item">CB650R — Extensor dianteiro</div><div class="catalog-item">Hornet / CBR600F — Paralama traseiro</div><div class="catalog-item">Sahara 300 — Extensor dianteiro</div>
+      </div></div>
+      <div class="catalog-card"><h3>Yamaha</h3><div class="model-list">
+        <div class="catalog-item">MT-03 — 3 produtos</div><div class="catalog-item">MT-07 — Spoiler e extensor</div><div class="catalog-item">R3 — Bico frontal e 2 paralamas</div><div class="catalog-item">Lander 250 — Extensor dianteiro</div><div class="catalog-item">Fazer 250 — Extensor dianteiro</div><div class="catalog-item">XJ6 — Paralama traseiro</div><div class="catalog-item">Crosser 150 / 150Z — Extensores</div><div class="catalog-item">Ténéré / Super Ténéré — Extensores</div>
+      </div></div>
+      <div class="catalog-card"><h3>Kawasaki</h3><div class="model-list">
+        <div class="catalog-item">Versys 650 — Linha completa</div><div class="catalog-item">Versys 1000 — Extensor dianteiro</div><div class="catalog-item">Z750 — Paralama traseiro</div><div class="catalog-item">Z900 — Extensor dianteiro</div>
+      </div></div>
+      <div class="catalog-card"><h3>BMW / Suzuki</h3><div class="model-list">
+        <div class="catalog-item">BMW R1300 GS — Extensor traseiro</div><div class="catalog-item">BMW F800GS / F700GS — Anti-spray</div><div class="catalog-item">Suzuki V-Strom 650 — Extensor dianteiro</div>
+      </div></div>
+      <div class="catalog-card"><h3>Tipos de peça</h3><div class="model-list">
+        <div class="catalog-item">Paralama traseiro</div><div class="catalog-item">Extensor dianteiro</div><div class="catalog-item">Spoiler</div><div class="catalog-item">Bico frontal</div><div class="catalog-item">Protetor de tanque</div><div class="catalog-item">Anti-spray</div><div class="catalog-item">Kit</div>
+      </div></div>
+    </div>
+  </section>
 
-        const data = await response.json();
+  <section class="section" id="produtos">
+    <div class="section-head">
+      <div><div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:.18em;">Produtos cadastrados</div><h2>Catálogo com base nos links de ontem</h2></div>
+      <div class="muted-card">Clique em “Selecionar” para levar o produto ao checkout de teste</div>
+    </div>
+    <div class="product-grid" id="product-grid"></div>
+  </section>
 
-        if (!response.ok) {
-          throw new Error(data.error || "Erro ao gerar pagamento.");
-        }
+  <footer>
+    DeFracing • catálogo montado com base nos seus anúncios • domínio pode ser conectado depois da compra.
+  </footer>
+</main>
 
-        if (!data.init_point) {
-          throw new Error("O Mercado Pago não retornou um link de checkout.");
-        }
+<script>
+const brands = {"Honda": ["CB1000R", "CB300 / CB300R", "CB300F Twister", "CB500X", "CB650R", "CBX 250 Twister", "Hornet 600 / CBR600F", "NC700 / NC750", "Sahara 300", "Titan / Fan"], "Yamaha": ["Crosser 150", "Crosser 150Z", "Fazer 250", "Lander 250", "MT-03", "MT-07", "R3", "Super Ténéré 1200", "Ténéré 250", "XJ6"], "Kawasaki": ["Versys 1000", "Versys 650", "Z750", "Z900"], "BMW": ["F800GS / F700GS", "R1300 GS"], "Suzuki": ["V-Strom 650"]};
+const products = [{"brand": "Honda", "model": "CB1000R", "name": "Paralama Traseiro CB1000R Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "NC700 / NC750", "name": "Paralama Traseiro NC700 / NC750 Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "Titan / Fan", "name": "Extensor Paralama Dianteiro Titan 150 160 e Fan", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CB300F Twister", "name": "Extensor Paralama Dianteiro CB300F Twister", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CB650R", "name": "Extensor Paralama Dianteiro CB650R", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "Hornet 600 / CBR600F", "name": "Paralama Traseiro Hornet 600 CBR600F 2008-2014", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CB500X", "name": "Extensor Paralama Dianteiro CB500X 2023+", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CB500X", "name": "Extensor Paralama Dianteiro CB500X 2020-2022", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "Sahara 300", "name": "Extensor Paralama Dianteiro Sahara 300", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CB300 / CB300R", "name": "Paralama Traseiro CB300 CB300R Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CB300 / CB300R", "name": "Spoiler Bico de Pato CB300", "type": "Spoiler", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CB300 / CB300R", "name": "Protetor de Tanque CB300R Estilo CB1000", "type": "Protetor de tanque", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CB300F Twister", "name": "Kit Extensor Paralama Dianteiro + Traseiro CB300F", "type": "Kit", "priceLabel": "Preço a revisar"}, {"brand": "Honda", "model": "CBX 250 Twister", "name": "Protetor de Tanque CBX 250 Twister", "type": "Protetor de tanque", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "MT-03", "name": "Paralama Traseiro MT-03 Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "MT-03", "name": "Paralama Traseiro MT-03 ABS Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "MT-03", "name": "Extensor Paralama Dianteiro MT-03", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "R3", "name": "Carenagem Frontal Yamaha R3 Bico Spoiler", "type": "Bico frontal", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "R3", "name": "Paralama Traseiro R3 ABS Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "R3", "name": "Paralama Traseiro Yamaha R3 Preto", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "Crosser 150", "name": "Extensor Paralama Dianteiro Crosser 150", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "Crosser 150Z", "name": "Extensor Paralama Dianteiro Crosser 150Z", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "Lander 250", "name": "Extensor Paralama Dianteiro Lander 250 Nova", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "Ténéré 250", "name": "Extensor Paralama Dianteiro Ténéré 250", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "Super Ténéré 1200", "name": "Extensor Paralama Dianteiro Super Ténéré 1200", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "Fazer 250", "name": "Extensor Paralama Dianteiro Fazer 250 2018+", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "MT-07", "name": "Spoiler Lateral MT-07 2019+", "type": "Spoiler", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "MT-07", "name": "Extensor Paralama Dianteiro MT-07", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Yamaha", "model": "XJ6", "name": "Paralama Traseiro XJ6 N/F Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Kawasaki", "model": "Versys 650", "name": "Paralama Traseiro Versys 650 Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Kawasaki", "model": "Versys 650", "name": "Paralama Traseiro Versys 650 ABS Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Kawasaki", "model": "Versys 650", "name": "Bico Frontal Versys 650", "type": "Bico frontal", "priceLabel": "Preço a revisar"}, {"brand": "Kawasaki", "model": "Versys 650", "name": "Extensor Paralama Dianteiro Versys 650", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Kawasaki", "model": "Versys 1000", "name": "Extensor Paralama Dianteiro Versys 650 / 1000", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "Kawasaki", "model": "Z750", "name": "Paralama Traseiro Z750 Preto Fosco", "type": "Paralama traseiro", "priceLabel": "Preço a revisar"}, {"brand": "Kawasaki", "model": "Z900", "name": "Extensor Paralama Dianteiro Z900", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}, {"brand": "BMW", "model": "R1300 GS", "name": "Extensor Para-lama Traseiro BMW R1300 GS", "type": "Extensor traseiro", "priceLabel": "Preço a revisar"}, {"brand": "BMW", "model": "F800GS / F700GS", "name": "Anti-Spray Traseiro BMW F800GS F700GS", "type": "Anti-spray", "priceLabel": "Preço a revisar"}, {"brand": "Suzuki", "model": "V-Strom 650", "name": "Extensor Paralama Dianteiro V-Strom 650 DL650", "type": "Extensor dianteiro", "priceLabel": "Preço a revisar"}];
+const brandGrid = document.getElementById("brand-grid");
+const grid = document.getElementById("product-grid");
+const selectedName = document.getElementById("selected-name");
+const selectedMeta = document.getElementById("selected-meta");
+const selectedPrice = document.getElementById("selected-price");
+let selectedProduct = { name: "Pedido de teste DeFracing", brand: "DeFracing", model: "Catálogo", type: "Pedido", priceLabel: "R$ 10,00" };
 
-        window.location.href = data.init_point;
-      } catch (err) {
-        errorBox.textContent = err.message || "Erro inesperado.";
-        errorBox.style.display = "block";
-      } finally {
-        btn.disabled = false;
-        btn.textContent = "Finalizar com Mercado Pago";
-      }
+brandGrid.innerHTML = Object.entries(brands).map(([brand, models]) => `
+  <div class="brand-card">
+    <h3>${brand}</h3>
+    <div class="model-list">
+      ${models.map(model => `<div class="model-item">${model}</div>`).join("")}
+    </div>
+  </div>
+`).join("");
+
+function renderProducts() {
+  grid.innerHTML = products.map((product, index) => `
+    <div class="product-card">
+      <span class="type-badge">${product.type}</span>
+      <p>${product.brand} • ${product.model}</p>
+      <h3>${product.name}</h3>
+      <div class="product-bottom">
+        <strong>${product.priceLabel}</strong>
+        <button class="secondary" type="button" data-index="${index}">Selecionar</button>
+      </div>
+    </div>
+  `).join("");
+
+  grid.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const product = products[Number(btn.dataset.index)];
+      selectedProduct = product;
+      selectedName.textContent = product.name;
+      selectedMeta.textContent = `${product.brand} • ${product.model} • Frete grátis`;
+      selectedPrice.textContent = product.priceLabel === "Preço a revisar" ? "R$ 10,00" : product.priceLabel;
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
-  </script>
+  });
+}
+
+function onlyDigits(v) { return (v || "").replace(/\D/g, ""); }
+
+document.getElementById("checkout-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("pay-btn");
+  const errorBox = document.getElementById("error-box");
+  errorBox.style.display = "none";
+  errorBox.textContent = "";
+  btn.disabled = true;
+  btn.textContent = "Gerando pagamento...";
+
+  const formData = new FormData(e.target);
+  const customer = Object.fromEntries(formData.entries());
+  customer.cpf = onlyDigits(customer.cpf);
+  customer.zipCode = onlyDigits(customer.zipCode);
+  customer.whatsapp = onlyDigits(customer.whatsapp);
+
+  try {
+    const response = await fetch("/api/create-preference", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ customer, product: selectedProduct })
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Erro ao gerar checkout.");
+    if (!data.init_point) throw new Error("O Mercado Pago não retornou o link de pagamento.");
+    window.location.href = data.init_point;
+  } catch (err) {
+    errorBox.textContent = err.message || "Erro inesperado.";
+    errorBox.style.display = "block";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Finalizar com Mercado Pago";
+  }
+});
+
+renderProducts();
+</script>
 </body>
 </html>
