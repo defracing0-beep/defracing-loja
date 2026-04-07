@@ -1,30 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Teste Checkout Mercado Pago</title>
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-<style>
-body{font-family:Arial,Helvetica,sans-serif;background:#f5f5f5;padding:40px}
-.card{background:#fff;padding:20px;border-radius:10px;max-width:420px;margin:auto;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-button{background:#009ee3;color:white;border:0;padding:12px 16px;border-radius:6px;font-size:16px;cursor:pointer}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeFracing - Teste Checkout Pro</title>
+  <style>
+    :root{
+      --red:#e31e24;
+      --dark:#2f3138;
+      --bg:#f5f5f7;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:#111827;
+    }
+    header{
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      padding:18px 24px;
+      position:sticky;
+      top:0;
+    }
+    .brand{
+      font-size:28px;
+      font-weight:800;
+      letter-spacing:-0.03em;
+    }
+    .brand .red{color:var(--red)}
+    .brand .dark{color:var(--dark)}
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:32px 20px 60px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+    }
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
+      box-shadow:0 12px 30px rgba(0,0,0,.04);
+    }
+    .hero{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:280px;
+    }
+    .badge{
+      display:inline-block;
+      border-radius:999px;
+      padding:8px 12px;
+      background:#fee2e2;
+      color:#991b1b;
+      font-size:13px;
+      font-weight:700;
+    }
+    h1{
+      margin:14px 0 12px;
+      font-size:40px;
+      line-height:1.05;
+    }
+    p{color:var(--muted); line-height:1.5}
+    .product{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:18px;
+      padding:16px;
+      border-radius:16px;
+      background:#fafafa;
+      border:1px solid var(--border);
+    }
+    .price{
+      font-size:34px;
+      font-weight:800;
+      color:var(--dark);
+    }
+    .free{
+      color:#065f46;
+      font-weight:700;
+      font-size:14px;
+    }
+    form{
+      display:grid;
+      gap:12px;
+      margin-top:8px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    input{
+      width:100%;
+      padding:13px 14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      font-size:15px;
+      outline:none;
+    }
+    input:focus{
+      border-color:#9ca3af;
+      box-shadow:0 0 0 3px rgba(17,24,39,.06);
+    }
+    button{
+      margin-top:10px;
+      padding:15px 18px;
+      border:0;
+      border-radius:14px;
+      background:var(--red);
+      color:white;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    button:disabled{
+      opacity:.7;
+      cursor:not-allowed;
+    }
+    .note{
+      margin-top:12px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .error{
+      margin-top:10px;
+      color:#b91c1c;
+      font-size:14px;
+      display:none;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:32px}
+      .row{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-<div class="card">
-<h2>Pagamento teste</h2>
-<p>Produto teste R$ 10,00</p>
-<button id="checkout-btn">Pagar com Mercado Pago</button>
-</div>
+  <header>
+    <div class="brand"><span class="red">D&F</span><span class="dark">racing</span></div>
+  </header>
 
-<script>
-const mp = new MercadoPago("SUA_PUBLIC_KEY_AQUI");
+  <main>
+    <div class="grid">
+      <section class="card hero">
+        <div>
+          <span class="badge">Checkout Pro Mercado Pago</span>
+          <h1>Teste real de pagamento da DeFracing</h1>
+          <p>
+            Esta página foi feita para validar o fluxo real do Checkout Pro.
+            O formulário coleta CPF e endereço para emissão da NFe e redireciona o cliente para o Mercado Pago.
+          </p>
+        </div>
 
-document.getElementById("checkout-btn").addEventListener("click", async () => {
-  alert("Aqui vamos redirecionar para checkout (simulação). Depois configuramos API.");
-});
-</script>
+        <div class="product">
+          <div>
+            <strong>Pedido de teste DeFracing</strong>
+            <div class="free">Frete grátis</div>
+          </div>
+          <div class="price">R$ 10,00</div>
+        </div>
+      </section>
 
+      <section class="card">
+        <h2 style="margin-top:0">Dados do cliente</h2>
+        <p style="margin-top:0">Preencha para seguir ao pagamento.</p>
+
+        <form id="checkout-form">
+          <input name="name" placeholder="Nome completo" required />
+          <div class="row">
+            <input name="cpf" placeholder="CPF (obrigatório para NFe)" required />
+            <input name="whatsapp" placeholder="WhatsApp" required />
+          </div>
+          <input name="email" type="email" placeholder="E-mail" required />
+          <div class="row">
+            <input name="zipCode" placeholder="CEP" required />
+            <input name="street" placeholder="Endereço" required />
+          </div>
+          <div class="row">
+            <input name="number" placeholder="Número" required />
+            <input name="district" placeholder="Bairro" required />
+          </div>
+          <div class="row">
+            <input name="city" placeholder="Cidade" required />
+            <input name="state" placeholder="Estado" required />
+          </div>
+          <button id="pay-btn" type="submit">Finalizar com Mercado Pago</button>
+          <div class="error" id="error-box"></div>
+          <div class="note">
+            Este projeto usa um item de teste de R$ 10,00. Depois você pode trocar o produto e o valor no arquivo <code>api/create-preference.js</code>.
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("checkout-form");
+    const btn = document.getElementById("pay-btn");
+    const errorBox = document.getElementById("error-box");
+
+    function onlyDigits(v){ return (v || "").replace(/\D/g, ""); }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorBox.style.display = "none";
+      errorBox.textContent = "";
+      btn.disabled = true;
+      btn.textContent = "Gerando pagamento...";
+
+      const formData = new FormData(form);
+      const customer = Object.fromEntries(formData.entries());
+      customer.cpf = onlyDigits(customer.cpf);
+      customer.zipCode = onlyDigits(customer.zipCode);
+      customer.whatsapp = onlyDigits(customer.whatsapp);
+
+      try {
+        const response = await fetch("/api/create-preference", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ customer })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Erro ao gerar pagamento.");
+        }
+
+        if (!data.init_point) {
+          throw new Error("O Mercado Pago não retornou um link de checkout.");
+        }
+
+        window.location.href = data.init_point;
+      } catch (err) {
+        errorBox.textContent = err.message || "Erro inesperado.";
+        errorBox.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Finalizar com Mercado Pago";
+      }
+    });
+  </script>
 </body>
 </html>
