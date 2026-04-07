@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teste Checkout Mercado Pago</title>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f5f5f5;padding:40px}
+.card{background:#fff;padding:20px;border-radius:10px;max-width:420px;margin:auto;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+button{background:#009ee3;color:white;border:0;padding:12px 16px;border-radius:6px;font-size:16px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Pagamento teste</h2>
+<p>Produto teste R$ 10,00</p>
+<button id="checkout-btn">Pagar com Mercado Pago</button>
+</div>
+
+<script>
+const mp = new MercadoPago("SUA_PUBLIC_KEY_AQUI");
+
+document.getElementById("checkout-btn").addEventListener("click", async () => {
+  alert("Aqui vamos redirecionar para checkout (simulação). Depois configuramos API.");
+});
+</script>
+
+</body>
+</html>
